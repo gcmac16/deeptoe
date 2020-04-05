@@ -6,3 +6,7 @@ class Error(Exception):
 class GameOverError(Error):
     """Raised when the game on a particular board is over"""
     pass
+
+
+class CellOccupiedError(Error):
+    """Raised when a move is played in a non-empty cell"""
