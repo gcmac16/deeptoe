@@ -105,3 +105,41 @@ class UltimateBoard(object):
 
         if self.turn == 'O':
             return 'X'
+        
+    def __str__(self) -> str:
+        """
+        This is literally the ugliest string function ever. But what it does
+        is generate a string that looks like the below:
+        
+        ---|---|---
+        --X|---|-O-
+        ---|---|---
+        -----------
+        ---|XO-|---
+        ---|---|---
+        X--|---|---
+        -----------
+        --O|---|---
+        ---|---|O--
+        ---|---|---
+        """
+
+        three_row_chunks = []
+        for board_index_1 in range(3):
+            big_row = []
+            for cell_index_1 in range(3):
+                row = []
+                for board_index_2 in range(3):
+                    tl_str = ''
+                    for cell_index_2 in range(3):
+                        board_id = f'{board_index_1}{board_index_2}'
+                        cell_id = f'{cell_index_1}{cell_index_2}'
+                        tl_str += str(self.boards[board_id].board[cell_id])
+                    row.append(tl_str)
+                big_row.append('|'.join(row))
+            three_row_chunks.append('\n'.join(big_row))
+
+        return ('\n'+'-'*11+'\n').join(three_row_chunks)
+    
+    def __repr__(self) -> str:
+        return self.__str__()

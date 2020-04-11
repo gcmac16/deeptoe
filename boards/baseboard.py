@@ -1,5 +1,6 @@
 from typing import (
     Dict,
+    List,
     Tuple,
     Union,
 )
@@ -60,6 +61,12 @@ class BaseBoard(object):
         
         return False, None
     
+    def get_empty_cell_ids(self) -> List[Cell]:
+        return [
+            cell_id for cell_id, cell in self.board.items()
+            if cell.is_empty
+        ]
+        
     def __str__(self) -> str:
         rows = (
             ('00', '01', '02'),
